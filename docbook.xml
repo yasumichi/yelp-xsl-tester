@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN'
+'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
+<book id="yelp-xsl-test" lang="ja">
+  <bookinfo>
+    <title>yelp-xsl のテスト用 DocBook</title>
+    <author><firstname>Yasumichi</firstname><surname>Akahoshi</surname></author>
+  </bookinfo>
+  <dedication>
+    <para>この DocBook を GNOME 日本語翻訳チームに捧げる。</para>
+  </dedication>
+  <chapter id="auto-title">
+    <title>自動的なタイトル生成</title>
+    <para>この章では、&lt;title&gt; 要素を指定しなかった場合に自動的にタイトルが生成される例について説明します。</para>
+    <sect1>
+      <title>msgid "Bibliography"</title>
+      <para>&lt;bibliography&gt; ブロックで &lt;title&gt; 要素を指定しなかった場合に自動で付与されるタイトルを制御します。例えば、
+<screen>
+  &lt;bibliography id="biblio"&gt;
+    &lt;biblioentry id="docbook5"&gt;
+      &lt;author&gt;&lt;firstname&gt;Norman&lt;/firstname&gt;&lt;surname&gt;Walsh&lt;/surname&gt;&lt;/author&gt;
+      &lt;copyright&gt;&lt;year&gt;2010, 2011&lt;/year&gt;
+             &lt;holder&gt;Norman Walsh&lt;/holder&gt;&lt;/copyright&gt;
+      &lt;editor&gt;&lt;firstname&gt;Richard&lt;/firstname&gt;&lt;surname&gt;Hamilton&lt;/surname&gt;&lt;/editor&gt;
+      &lt;isbn&gt;9780596805029&lt;/isbn&gt;
+      &lt;publisher&gt;
+	&lt;publishername&gt;O'Reilly Media&lt;/publishername&gt;
+      &lt;/publisher&gt;
+      &lt;title&gt;DocBook 5: The Definitive Guide&lt;/title&gt;
+    &lt;/biblioentry&gt;
+  &lt;/bibliography&gt;
+</screen>
+のように書かれている場合、<xref linkend="biblio" /> のように自動でタイトルが付与されます。</para>
+    </sect1>
+    <sect1>
+      <title>msgid "Dedication"</title>
+      <para>&lt;dedication&gt; ブロックに対し、自動的に付与されるタイトルを制御します。例えば、この DocBook のソースには、
+<screen>
+  &lt;dedication&gt;
+    &lt;para&gt;この DocBook を GNOME 日本語翻訳チームに捧げる。&lt;/para&gt;
+  &lt;/dedication&gt;
+</screen>
+という部分がありますが、目次ページの次のページのように自動でタイトルが付加されます。</para>
+    </sect1>
+    <sect1>
+      <title>msgid "Glossary"</title>
+      <para>&lt;glossary&gt; ブロックに &lt;title&gt; 要素が指定されなかった場合に自動的に付与されるタイトルを制御します。</para>
+<screen>
+  &lt;glossary&gt;
+    &lt;glossentry&gt;
+      &lt;glossterm&gt;アクティビティ画面&lt;/glossterm&gt;
+      &lt;glossdef&gt;
+	&lt;para&gt;画面左上にある &lt;guimenu&gt;アクティビティ&lt;/guimenu&gt;
+	をクリックした時に表示される画面をいう。&lt;/para&gt;
+      &lt;/glossdef&gt;
+    &lt;/glossentry&gt;
+  &lt;/glossary&gt;
+</screen>
+      <para>このようなブロックが含まれる場合、<xref linkend="glossary" />のように自動的にタイトルが付与されます。</para>
+    </sect1>
+    <sect1>
+      <title>msgid "Index"</title>
+      <para>&lt;index&gt; ブロックに &lt;title&gt; 要素が指定されなかった場合に自動的に付与されるタイトルを制御します。</para>
+      <para>このドキュメントには、
+<screen>
+  &lt;index&gt;
+    &lt;indexentry&gt;
+      &lt;primaryie&gt;タイトル&lt;/primaryie>
+      &lt;secondaryie&gt;&lt;xref linkend="auto-title" />&lt;/secondaryie>
+    &lt;/indexentry&gt;
+    &lt;indexentry&gt;
+      &lt;primaryie&gt;ツールチップ&lt;/primaryie>
+      &lt;secondaryie&gt;&lt;xref linkend="tooltip" />&lt;/secondaryie>
+    &lt;/indexentry&gt;
+  &lt;/index&gt;
+</screen>
+のような記述がありますが、&lt;title&gt; 要素が指定されていません。このような場合には、<xref linkend="testindex" />のように自動でタイトルが付与されます。</para>
+    </sect1>
+  </chapter>
+  <chapter id="tooltip">
+    <title>ツールチップ生成</title>
+    <para>いくつかの要素には、ツールチップが付与されます。</para>
+    <sect1>
+      <title>msgid "Send email to ‘&lt;string/&gt;’."</title>
+      <para>&lt;email&gt; 要素にマウスカーソルを合わせると表示されるツールチップを制御します。</para>
+      <screen>&lt;para&gt;このドキュメントにご意見のある方は、&lt;email&gt;yasumichi@vinelinux.org&lt;/email&gt;宛にご連絡ください。&lt;/para&gt;</screen>
+      <para>上記のように記述すると次のように表示されますのでメールアドレス部分にマウスカーソルを合わせてみてください。</para>
+      <para>このドキュメントにご意見のある方は、<email>yasumichi@vinelinux.org</email>宛にご連絡ください。</para>
+    </sect1>
+    <sect1>
+      <title>msgid "View the bibliography entry &lt;biblioentry.label/&gt;."</title>
+      <para>クロスリファレンス用の要素である &lt;xref&gt; 要素の linkend 属性に &lt;biblioentry&gt; 要素の id 属性値が指定された場合にリンクアンカーにマウスカーソルを合わせると表示されるツールチップの内容を制御します。</para>
+      <screen>&lt;para&gt;DocBook の参考文献として、&lt;xref linkend="docbook5" /&gt;を紹介しています。&lt;/para&gt;</screen>
+      <para>上記のような記述があると次のように表示されますのでリンクアンカーにマウスカーソルを合わせてみてください。</para>
+      <para>DocBook の参考文献として、<xref linkend="docbook5" />を紹介しています。</para>
+    </sect1>
+    <sect1>
+      <title>msgid "Important"</title>
+      <para>&lt;important&gt; ブロックにマウスカーソルを合わせた場合に表示されるツールチップを制御します。</para>
+<screen>
+      &lt;important&gt;
+	&lt;title&gt;&lt;important&gt; ブロックのツールチップ&lt;/title&gt;
+	&lt;para&gt;このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。&lt;/para&gt;
+      &lt;/important&gt;
+</screen>
+      <para>上記のようなブロックを記述すると以下のように表示されます。</para>
+      <important>
+	<title>&lt;important&gt; ブロックのツールチップ</title>
+	<para>このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。</para>
+      </important>
+    </sect1>
+    <sect1>
+      <title>msgid "Tip"</title>
+      <para>&lt;tip&gt; ブロックにマウスカーソルを合わせた場合に表示されるツールチップを制御します。</para>
+<screen>
+      &lt;tip&gt;
+	&lt;title&gt;&lt;tip&gt; ブロックのツールチップ&lt;/title&gt;
+	&lt;para&gt;このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。&lt;/para&gt;
+      &lt;/tip&gt;
+</screen>
+      <para>上記のようなブロックを記述すると以下のように表示されます。</para>
+      <tip>
+        <title>&lt;tip&gt; ブロックのツールチップ</title>
+	<para>このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。</para>
+      </tip>
+    </sect1>
+    <sect1>
+      <title>msgid "Warning"</title>
+      <para>&lt;warning&gt; ブロックにマウスカーソルを合わせた場合に表示されるツールチップを制御します。</para>
+<screen>
+      &lt;warning&gt;
+	&lt;title&gt;&lt;warning&gt; ブロックのツールチップ&lt;/title&gt;
+	&lt;para&gt;このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。&lt;/para&gt;
+      &lt;/warning&gt;
+</screen>
+      <para>上記のようなブロックを記述すると以下のように表示されます。</para>
+      <warning>
+	<title>&lt;warning&gt; ブロックのツールチップ</title>
+	<para>このブロックにマウスカーソルを合わせた時に表示されるツールチップをご確認ください。</para>
+      </warning>
+    </sect1>
+  </chapter>
+  <chapter id="listing">
+    <title>リストの整形(確認中)</title>
+    <sect1>
+      <title>simplelist</title>
+      <para>
+      	代表的なデスクトップ環境:
+	<simplelist type="inline">
+	  <member>GNOME</member>
+	  <member>KDE</member>
+	</simplelist>
+      </para>
+      <para>
+	<simplelist type="inline">
+	  <member>Arch Linux</member>
+	  <member>Debian</member>
+	  <member>Dragora GNU/Linux</member>
+	  <member>Fedora (as of 14)</member>
+	  <member>SuSE</member>
+	  <member>Ubuntu</member>
+	</simplelist>
+      </para>
+    </sect1>
+  </chapter>
+  <chapter>
+    <title>msgid "Q:" と msgid "A:"</title>
+    <para>それぞれ、&lt;question&gt; 要素と &lt;answer&gt; 要素の冒頭に付加されるラベルを制御しています。</para>
+<screen>
+    &lt;qandaset defaultlabel='qanda'&gt;
+      &lt;qandaentry&gt;
+	&lt;question&gt;
+	  &lt;para&gt;最初の質問&lt;/para&gt;
+	&lt;/question&gt;
+	&lt;answer&gt;
+	  &lt;para&gt;最初の答え&lt;/para&gt;
+	&lt;/answer&gt;
+      &lt;/qandaentry&gt;
+      &lt;qandaentry&gt;
+	&lt;question&gt;
+	  &lt;para&gt;次の質問&lt;/para&gt;
+	&lt;/question&gt;
+	&lt;answer&gt;
+	  &lt;para&gt;次の答え&lt;/para&gt;
+	&lt;/answer&gt;
+      &lt;/qandaentry&gt;
+    &lt;/qandaset&gt;
+</screen>
+    <para>上記のように書くと以下のように表示されます。</para>
+    <qandaset defaultlabel='qanda'>
+      <qandaentry>
+	<question>
+	  <para>最初の質問</para>
+	</question>
+	<answer>
+	  <para>最初の答え</para>
+	</answer>
+      </qandaentry>
+      <qandaentry>
+	<question>
+	  <para>次の質問</para>
+	</question>
+	<answer>
+	  <para>次の答え</para>
+	</answer>
+      </qandaentry>
+    </qandaset>
+  </chapter>
+
+  <bibliography id="biblio">
+    <biblioentry id="docbook5">
+      <author><firstname>Norman</firstname><surname>Walsh</surname></author>
+      <copyright><year>2010, 2011</year>
+             <holder>Norman Walsh</holder></copyright>
+      <editor><firstname>Richard</firstname><surname>Hamilton</surname></editor>
+      <isbn>9780596805029</isbn>
+      <publisher>
+	<publishername>O'Reilly Media</publishername>
+      </publisher>
+      <title>DocBook 5: The Definitive Guide</title>
+    </biblioentry>
+  </bibliography>
+
+  <glossary id="glossary">
+    <glossentry>
+      <glossterm>アクティビティ画面</glossterm>
+      <glossdef>
+	<para>画面左上にある <guimenu>アクティビティ</guimenu>
+	をクリックした時に表示される画面をいう。</para></glossdef>
+    </glossentry>
+  </glossary>
+
+  <index id="testindex">
+    <indexentry>
+      <primaryie>タイトル</primaryie>
+      <secondaryie><xref linkend="auto-title" /></secondaryie>
+    </indexentry>
+    <indexentry>
+      <primaryie>ツールチップ</primaryie>
+      <secondaryie><xref linkend="tooltip" /></secondaryie>
+    </indexentry>
+  </index>
+
+</book>
+<!--
+vim:softtabstop=2
+-->
